@@ -98,6 +98,15 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""892a3f35-3a81-4ca7-beb8-c423ba178851"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -406,6 +415,17 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99fe26c8-aac3-4e64-bca0-1d61a99edbfe"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1001,6 +1021,7 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
         m_GamePlay_Console = m_GamePlay.FindAction("Console", throwIfNotFound: true);
         m_GamePlay_Pause = m_GamePlay.FindAction("Pause", throwIfNotFound: true);
         m_GamePlay_Inventory = m_GamePlay.FindAction("Inventory", throwIfNotFound: true);
+        m_GamePlay_Restart = m_GamePlay.FindAction("Restart", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1088,6 +1109,7 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Console;
     private readonly InputAction m_GamePlay_Pause;
     private readonly InputAction m_GamePlay_Inventory;
+    private readonly InputAction m_GamePlay_Restart;
     public struct GamePlayActions
     {
         private @GameControl m_Wrapper;
@@ -1100,6 +1122,7 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
         public InputAction @Console => m_Wrapper.m_GamePlay_Console;
         public InputAction @Pause => m_Wrapper.m_GamePlay_Pause;
         public InputAction @Inventory => m_Wrapper.m_GamePlay_Inventory;
+        public InputAction @Restart => m_Wrapper.m_GamePlay_Restart;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1133,6 +1156,9 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @Restart.started += instance.OnRestart;
+            @Restart.performed += instance.OnRestart;
+            @Restart.canceled += instance.OnRestart;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -1161,6 +1187,9 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @Restart.started -= instance.OnRestart;
+            @Restart.performed -= instance.OnRestart;
+            @Restart.canceled -= instance.OnRestart;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -1351,6 +1380,7 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
         void OnConsole(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnRestart(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

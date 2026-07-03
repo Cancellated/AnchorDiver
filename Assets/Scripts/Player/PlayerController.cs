@@ -1,4 +1,5 @@
 using Logger;
+using MyGame.Events;
 using MyGame.Managers;
 using UnityEngine;
 
@@ -37,6 +38,7 @@ namespace MyGame.Control
         private GameControl m_inputActions;
         private float m_diveCooldownTimer;
         private bool m_isDiveReady = true;
+        private bool m_isDead;
 
         private const string LOG_MODULE = LogModules.PLAYER;
 
@@ -68,21 +70,62 @@ namespace MyGame.Control
         }
 
         /// <summary>
-        /// 每帧处理下潜CD计时
+        /// 注册游戏结束事件监听
+        /// </summary>
+        private void OnEnable()
+        {
+            GameEvents.OnGameOver += OnGameOver;
+        }
+
+        /// <summary>
+        /// 注销游戏结束事件监听
+        /// </summary>
+        private void OnDisable()
+        {
+            GameEvents.OnGameOver -= OnGameOver;
+        }
+
+        /// <summary>
+        /// 每帧处理下潜CD计时（死亡后跳过）
         /// </summary>
         private void Update()
         {
+            if (m_isDead) return;
+
             UpdateDiveCooldown();
             HandleDiveInput();
         }
 
         /// <summary>
-        /// 固定物理帧处理浮力和水平移动
+        /// 固定物理帧处理浮力和水平移动（死亡后跳过）
         /// </summary>
         private void FixedUpdate()
         {
+            if (m_isDead) return;
+
             ApplyBuoyancy();
             ApplyHorizontalMovement();
+        }
+
+        #endregion
+
+        #region 死亡处理
+
+        /// <summary>
+        /// 游戏结束事件回调
+        /// </summary>
+        /// <param name="isWin">是否胜利</param>
+        private void OnGameOver(bool isWin)
+        {
+            if (m_isDead) return;
+
+            m_isDead = true;
+
+            // 停止所有物理运动
+            m_rigidbody.velocity = Vector2.zero;
+            m_rigidbody.simulated = false;
+
+            Log.Info(LOG_MODULE, $"玩家死亡，已禁用控制。胜利：{isWin}");
         }
 
         #endregion

@@ -110,7 +110,10 @@ namespace MyGame.UI.LevelSelect.Controller
             LevelData level = m_model.Levels[index];
             Log.Info(LOG_MODULE, $"进入关卡: {level.levelName} → 加载场景 {level.sceneName}");
 
-            // 触发游戏开始事件，然后加载关卡场景
+            // 切换到GamePlay输入模式（关卡场景需要玩家操作）
+            InputManager.Instance.SwitchToGamePlayMode();
+
+            // 触发游戏开始事件，加载关卡场景
             GameEvents.TriggerGameStart();
             SceneSwitcher.RequestLoadScene(level.sceneName);
         }

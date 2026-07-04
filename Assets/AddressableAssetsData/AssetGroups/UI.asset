@@ -29,6 +29,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54b95722345494f408f20dcab27e7d4e
+    m_Address: Assets/Art Asset/Prefabs/UI/Settings/SettingsPage.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 61cbbcb34fac11a4ba2ff461275b3ba5
     m_Address: Assets/Art Asset/Prefabs/UI/Loading/LoadingScreen.prefab
     m_ReadOnly: 0
@@ -49,6 +55,24 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a09f6ea8de86cb64ba63f73cdbd54a0f
     m_Address: Assets/Art Asset/Prefabs/UI/HUD/HUD.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a144851865dcf4442a9d7ff2d4c8d8b6
+    m_Address: Assets/Art Asset/Prefabs/UI/AboutPanel/AboutPanel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cea31abe73ebd564aa12a6edb9341d3f
+    m_Address: Assets/Art Asset/Prefabs/UI/MainMenu/MainMenu.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fcfc1db31f6077648994656aaba06435
+    m_Address: Assets/Art Asset/Prefabs/UI/DeathOverlay/DeathOverlay.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prefabs

@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 8568955850829122307}
   - component: {fileID: 7472469903430808944}
   - component: {fileID: 4435901341798266564}
+  - component: {fileID: 6350058194015659479}
   m_Layer: 0
   m_Name: LoadingScreen
   m_TagString: Untagged
@@ -199,6 +200,8 @@ MonoBehaviour:
   m_canvasGroup: {fileID: 4435901341798266564}
   m_panelType: 6
   m_fadeDuration: 0.3
+  canvasSortingOrder: 1000
+  m_animator: {fileID: 6350058194015659479}
 --- !u!114 &8568955850829122307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,3 +256,24 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!95 &6350058194015659479
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7174676498187163783}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a045f6281080a484f9666ad5d8bd2389, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

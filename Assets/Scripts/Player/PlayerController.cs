@@ -70,19 +70,27 @@ namespace MyGame.Control
         }
 
         /// <summary>
-        /// 注册游戏结束事件监听
+        /// 注册游戏事件监听
         /// </summary>
         private void OnEnable()
         {
             GameEvents.OnGameOver += OnGameOver;
+            GameEvents.OnQuickRestart += OnQuickRestart;
         }
 
         /// <summary>
-        /// 注销游戏结束事件监听
+        /// 注销游戏事件监听
         /// </summary>
         private void OnDisable()
         {
             GameEvents.OnGameOver -= OnGameOver;
+            GameEvents.OnQuickRestart -= OnQuickRestart;
+        }
+
+        private void Start()
+        {
+            m_inputActions = InputManager.Instance.InputActions;
+            InputManager.Instance.SwitchToGamePlayMode();
         }
 
         /// <summary>
@@ -126,6 +134,24 @@ namespace MyGame.Control
             m_rigidbody.simulated = false;
 
             Log.Info(LOG_MODULE, $"玩家死亡，已禁用控制。胜利：{isWin}");
+        }
+
+        /// <summary>
+        /// 快速重开事件回调：重置玩家状态
+        /// </summary>
+        private void OnQuickRestart()
+        {
+            m_isDead = false;
+
+            // 恢复物理模拟并清零速度
+            m_rigidbody.simulated = true;
+            m_rigidbody.velocity = Vector2.zero;
+
+            // 重置下潜冷却
+            m_isDiveReady = true;
+            m_diveCooldownTimer = 0f;
+
+            Log.Info(LOG_MODULE, "玩家状态已重置");
         }
 
         #endregion

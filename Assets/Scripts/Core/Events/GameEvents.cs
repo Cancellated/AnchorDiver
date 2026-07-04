@@ -223,5 +223,20 @@ namespace MyGame.Events
         }
 
         #endregion
+
+        #region 重生事件
+
+        /// <summary>
+        /// 快速重开/重生事件（不重新加载场景，仅重置状态和位置）
+        /// </summary>
+        public static event Action OnQuickRestart;
+
+        public static void TriggerQuickRestart()
+        {
+            Log.Info(module, "触发快速重开事件");
+            OnQuickRestart?.Invoke();
+        }
+
+        #endregion
     }
 }

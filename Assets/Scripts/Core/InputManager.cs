@@ -1,4 +1,5 @@
 using UnityEngine;
+using Logger;
 
 namespace MyGame.Managers
 {
@@ -10,6 +11,7 @@ namespace MyGame.Managers
     {
         #region 字段
         private GameControl _inputActions;
+        private const string LOG_MODULE = LogModules.INPUT;
         #endregion
 
         #region 属性
@@ -51,6 +53,7 @@ namespace MyGame.Managers
         /// </summary>
         public void SwitchToGamePlayMode()
         {
+            Log.Info(LOG_MODULE, "切换到游戏操作输入模式");
             _inputActions.UI.Disable();
             _inputActions.GamePlay.Enable();
         }
@@ -61,6 +64,7 @@ namespace MyGame.Managers
         /// </summary>
         public void SwitchToUIMode()
         {
+            Log.Info(LOG_MODULE, "切换到UI输入模式");
             _inputActions.GamePlay.Disable();
             // 单独启用控制台按键，确保在任何模式下都能唤出控制台
             _inputActions.GamePlay.Console.Enable();
@@ -72,6 +76,7 @@ namespace MyGame.Managers
         /// </summary>
         public void EnableBothModes()
         {
+            Log.Info(LOG_MODULE, "同时启用游戏操作和UI输入模式");
             _inputActions.GamePlay.Enable();
             _inputActions.UI.Enable();
         }
@@ -81,8 +86,41 @@ namespace MyGame.Managers
         /// </summary>
         public void DisableAllInputs()
         {
+            Log.Info(LOG_MODULE, "禁用所有输入");
             _inputActions.GamePlay.Disable();
             _inputActions.UI.Disable();
+        }
+
+        #endregion
+
+        #region 调试工具
+        /// <summary>
+        /// 当前GamePlay操作模式是否启用
+        /// </summary>
+        public bool IsGamePlayEnabled
+        {
+            get { return _inputActions != null && _inputActions.GamePlay.enabled; }
+        }
+
+        /// <summary>
+        /// 当前UI操作模式是否启用
+        /// </summary>
+        public bool IsUIEnabled
+        {
+            get { return _inputActions != null && _inputActions.UI.enabled; }
+        }
+
+        /// <summary>
+        /// 获取当前输入模式描述（调试用）
+        /// </summary>
+        public string GetModeDescription()
+        {
+            bool gp = IsGamePlayEnabled;
+            bool ui = IsUIEnabled;
+            if (gp && ui) return "GamePlay + UI";
+            if (gp) return "GamePlay";
+            if (ui) return "UI";
+            return "无";
         }
         #endregion
     }

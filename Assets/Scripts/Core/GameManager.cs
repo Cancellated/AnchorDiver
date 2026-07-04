@@ -63,9 +63,13 @@ namespace MyGame.Managers
 
         private void Update()
         {
-            // 检测键盘ESC键和手柄Start键(在Inputsystem中配置的暂停键)
-            if (InputManager.Instance != null && InputManager.Instance.InputActions != null && 
-                InputManager.Instance.InputActions.GamePlay.Pause.triggered)
+            if (InputManager.Instance == null || InputManager.Instance.InputActions == null)
+                return;
+
+            var input = InputManager.Instance.InputActions;
+
+            // 暂停/恢复检测
+            if (input.GamePlay.Pause.triggered)
             {
                 if (State == GameState.Playing)
                 {
@@ -75,6 +79,12 @@ namespace MyGame.Managers
                 {
                     GameEvents.TriggerGameResume();
                 }
+            }
+
+            // 快速重开检测（Playing/Paused/GameOver 状态下均可使用）
+            if (input.GamePlay.Restart.triggered || input.UI.Restart.triggered)
+            {
+                RestartCurrentScene();
             }
         }
         #endregion
@@ -131,6 +141,18 @@ namespace MyGame.Managers
             // TODO: 初始化菜单
             Time.timeScale = 1f;
             Log.Info(LOG_MODULE, "进入菜单", this);
+        }
+
+        /// <summary>
+        /// 快速重开当前关卡
+        /// 不重新加载场景，通过 OnQuickRestart 事件通知各模块重置状态
+        /// Playing/Paused/GameOver 状态下均可响应
+        /// </summary>
+        private void RestartCurrentScene()
+        {
+            Log.Info(LOG_MODULE, "快速重开，触发重生事件");
+            Time.timeScale = 1f;
+            GameEvents.TriggerQuickRestart();
         }
 
         /// <summary>

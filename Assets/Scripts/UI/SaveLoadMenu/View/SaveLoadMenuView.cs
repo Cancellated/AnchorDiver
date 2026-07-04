@@ -7,6 +7,7 @@ using MyGame.Data;
 using MyGame.UI.SaveLoad.Events;
 using MyGame.UI.SaveLoad.Controller;
 using MyGame.UI;
+using Logger;
 
 namespace MyGame.UI.SaveLoad.View
 {
@@ -147,6 +148,8 @@ namespace MyGame.UI.SaveLoad.View
 
         protected SaveLoadMenuModel _model;
         protected List<ISaveSlotUI> _saveSlotUIs = new();
+
+        private const string LOG_MODULE = LogModules.SAVELOAD;
         
         /// <summary>
         /// 控制器组件
@@ -267,7 +270,7 @@ namespace MyGame.UI.SaveLoad.View
             
             if (config == null)
             {
-                Debug.LogError("SaveLoadMenuConfig is not set in controller");
+                Log.Error(LOG_MODULE, "SaveLoadMenuConfig is not set in controller");
                 return;
             }
             
@@ -303,12 +306,12 @@ namespace MyGame.UI.SaveLoad.View
                 }
                 else
                 {
-                    Debug.LogError("Failed to load save slot prefab with Addressable: " + config.SaveSlotPrefabAddress);
+                    Log.Error(LOG_MODULE, "加载存档槽预制件失败，错误信息: " + prefabLoadHandle.Status);
                 }
             }
             catch (System.Exception e)
             {
-                Debug.LogError("Error loading save slot prefab: " + e.Message);
+                Log.Error(LOG_MODULE, "加载存档槽预制件失败，错误信息: " + e.Message);
             }
         }
         
@@ -569,9 +572,6 @@ namespace MyGame.UI.SaveLoad.View
                 saveOptionsMenu.SetActive(false);
             }
         }
-        
-
-        
         
         /// <summary>
         /// 处理存档槽更新事件

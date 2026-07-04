@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1764981827711479002}
   - component: {fileID: 2908733887753431671}
+  - component: {fileID: 2410910364404508429}
   - component: {fileID: 2807458721971655981}
   - component: {fileID: 259992899844030652}
-  - component: {fileID: 2410910364404508429}
   - component: {fileID: 3573445971451321987}
   m_Layer: 0
   m_Name: HUD
@@ -48,6 +48,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1605727562689029821}
   m_CullTransparentMesh: 1
+--- !u!114 &2410910364404508429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605727562689029821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef033f2ee3b08946abe7c6e8704f502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_canvasGroup: {fileID: 259992899844030652}
+  m_panelType: 5
+  m_fadeDuration: 0.3
 --- !u!114 &2807458721971655981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,21 +105,6 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &2410910364404508429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605727562689029821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ef033f2ee3b08946abe7c6e8704f502, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_canvasGroup: {fileID: 259992899844030652}
-  m_panelType: 5
-  m_fadeDuration: 0.3
 --- !u!114 &3573445971451321987
 MonoBehaviour:
   m_ObjectHideFlags: 0

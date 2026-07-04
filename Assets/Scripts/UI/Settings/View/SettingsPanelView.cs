@@ -147,27 +147,22 @@ namespace MyGame.UI.Settings.View
 
         /// <summary>
         /// 尝试绑定控制器
+        /// View与Controller挂载在同一GameObject上，直接从自身获取
         /// </summary>
         protected override void TryBindController()
         {
             if (m_controller == null)
             {
-                // 首先尝试在父物体中查找控制器
-                if (!transform.parent.TryGetComponent<SettingsPanelController>(out var controller))
-                {
-                    // 如果父物体中没有，尝试在整个场景中查找
-                    controller = FindObjectOfType<SettingsPanelController>();
-                    if (controller == null)
-                    {
-                        Log.Error(LOG_MODULE, "未找到SettingsPanelController实例，请确保已将控制器脚本挂载到组件上");
-                    }
-                }
+                m_controller = GetComponent<SettingsPanelController>();
                 
-                m_controller = controller;
                 if (m_controller != null)
                 {
                     OnControllerBound();
                     Log.Info(LOG_MODULE, "已成功绑定SettingsPanelController");
+                }
+                else
+                {
+                    Log.Error(LOG_MODULE, "未找到SettingsPanelController实例，请确保已将控制器脚本挂载到同一GameObject上");
                 }
             }
         }

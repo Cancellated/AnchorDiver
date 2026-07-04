@@ -21,5 +21,6 @@ namespace MyGame.UI
         SettingsPanel,
         AboutPanel,
         LevelSelect,
+        DeathOverlay,
     }
 }

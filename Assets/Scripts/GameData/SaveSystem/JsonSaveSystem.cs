@@ -22,11 +22,12 @@ namespace MyGame.Data
         
         /// <summary>
         /// 初始化JSON存档系统。
+        /// 存档保存在项目根目录下的Saves文件夹中，便于开发调试。
         /// </summary>
         public JsonSaveSystem()
         {
-            // 使用Unity持久化数据路径作为存档根目录
-            m_saveDirectoryPath = Path.Combine(Application.persistentDataPath, SAVE_FOLDER_NAME);
+            // 使用项目根目录（Assets的上级目录）作为存档根目录
+            m_saveDirectoryPath = Path.Combine(Application.dataPath, "..", SAVE_FOLDER_NAME);
             
             // 确保存档文件夹存在
             if (!Directory.Exists(m_saveDirectoryPath))

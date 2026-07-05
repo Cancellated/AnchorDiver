@@ -22,6 +22,9 @@ namespace MyGame.Item
         [Tooltip("是否可反复开关")]
         [SerializeField] private bool m_canToggleBack = false;
 
+        [Tooltip("关卡开始时栅栏是否处于打开状态")]
+        [SerializeField] private bool m_startOpen = false;
+
         [Header("栅栏tile")]
         [Tooltip("关闭状态的栅栏tile")]
         [SerializeField] private TileBase m_gateClosedTile;
@@ -61,6 +64,18 @@ namespace MyGame.Item
                 {
                     m_gateCells.Add(cell);
                 }
+            }
+        }
+
+        /// <summary>
+        /// 根据初始配置应用开关状态
+        /// </summary>
+        private void Start()
+        {
+            if (m_startOpen)
+            {
+                m_isOpen = true;
+                OpenGates();
             }
         }
 
@@ -120,12 +135,16 @@ namespace MyGame.Item
 
         private void OnQuickRestart()
         {
-            foreach (var cell in m_gateCells)
+            if (m_startOpen)
             {
-                m_gateTilemap.SetTile(cell, m_gateClosedTile);
+                m_isOpen = true;
+                OpenGates();
             }
-            m_gateCollider.enabled = true;
-            m_isOpen = false;
+            else
+            {
+                m_isOpen = false;
+                CloseGates();
+            }
         }
 
         #endregion

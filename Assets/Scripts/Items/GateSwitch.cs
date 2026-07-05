@@ -25,6 +25,9 @@ namespace MyGame.Item
         [Tooltip("两次触发的最小间隔（秒）")]
         [SerializeField] private float m_triggerCooldown = 0.2f;
 
+        [Tooltip("关卡开始时开关是否处于开启状态")]
+        [SerializeField] private bool m_startOn = false;
+
         private Tilemap m_tilemap;
         private bool m_isOn;
         private float m_lastTriggerTime = -99f;
@@ -32,6 +35,18 @@ namespace MyGame.Item
         private void Awake()
         {
             m_tilemap = GetComponent<Tilemap>();
+        }
+
+        /// <summary>
+        /// 根据初始配置设置开关tile显示
+        /// </summary>
+        private void Start()
+        {
+            if (m_startOn)
+            {
+                m_isOn = true;
+                SetAllSwitchTiles(m_onTile);
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -81,6 +96,20 @@ namespace MyGame.Item
             }
 
             return nearest;
+        }
+
+        /// <summary>
+        /// 将Tilemap上所有开关cell设置为指定tile
+        /// </summary>
+        private void SetAllSwitchTiles(TileBase tile)
+        {
+            foreach (Vector3Int cell in m_tilemap.cellBounds.allPositionsWithin)
+            {
+                if (m_tilemap.GetTile(cell) != null)
+                {
+                    m_tilemap.SetTile(cell, tile);
+                }
+            }
         }
     }
 }

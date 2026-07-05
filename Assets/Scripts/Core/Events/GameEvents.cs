@@ -237,6 +237,17 @@ namespace MyGame.Events
             OnAnchorCountChanged?.Invoke(remaining, max);
         }
 
+        /// <summary>
+        /// 锚落地事件（锚碰触地形锚定时触发）
+        /// </summary>
+        public static event Action OnAnchorLanded;
+
+        public static void TriggerAnchorLanded()
+        {
+            Log.Info(module, "触发锚落地事件");
+            OnAnchorLanded?.Invoke();
+        }
+
         #endregion
 
         #region 氧气事件

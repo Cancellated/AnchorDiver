@@ -14,30 +14,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - levelId: 1001
-    levelName: "\u65B0\u4EBA"
+    levelName: "\u65B0\u624B\u6559\u5B66"
     sceneName: level_1
     description: 
     isUnlockedByDefault: 1
     maxOxygen: 15
-    maxAnchors: 2
+    maxAnchors: 1
   - levelId: 1002
-    levelName: "\u8BF7\u8F93\u5165\u6587\u672C"
+    levelName: "\u6D41\u52A8\u7684\u6C34"
     sceneName: level_2
     description: 
     isUnlockedByDefault: 0
-    maxOxygen: 30
-    maxAnchors: 2
+    maxOxygen: 15
+    maxAnchors: 1
   - levelId: 1003
-    levelName: "\u968F\u4FBF\u4E00\u4E2A\u540D\u5B57"
+    levelName: "\u5F00\u5173"
     sceneName: level_3
     description: 
     isUnlockedByDefault: 0
-    maxOxygen: 30
-    maxAnchors: 2
+    maxOxygen: 20
+    maxAnchors: 1
   - levelId: 1004
-    levelName: "\u4E00\u4E2A\u5173\u5361"
+    levelName: "\u5F00\u5173\u5728\u4E0A\u9762"
     sceneName: level_4
     description: 
     isUnlockedByDefault: 0
-    maxOxygen: 30
+    maxOxygen: 15
+    maxAnchors: 1
+  - levelId: 1004
+    levelName: "\u6211\u4E0D\u4F1A\u5173\u5361\u8BBE\u8BA1"
+    sceneName: level_5
+    description: 
+    isUnlockedByDefault: 0
+    maxOxygen: 15
     maxAnchors: 2
